@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const DishesModel = mongoose.model("dishes", {
   name: { type: String, required: true },
@@ -8,4 +8,4 @@ const DishesModel = mongoose.model("dishes", {
   quantity: { type: Number, required: true },
 });
 
-module.exports = DishesModel;
+export default DishesModel;

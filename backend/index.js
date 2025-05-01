@@ -1,27 +1,23 @@
-const express = require("express");
-const mongoose = require("mongoose");
-
-const cors = require("cors");
-const dishes = require("./routes/dishRoutes");
-const userRoutes = require("./routes/userRoutes");
+import express from "express";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import cors from "cors";
+import dishes from './routes/dishRoutes.js';  // Added .js extension
+import userRoutes from './routes/userRoutes.js';  // Added .js extension
 
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001;
 
 app.use(cors());
+dotenv.config();
 
 app.use(express.json());
-
-mongoose
-  .connect(
-    "mongodb+srv://saiteja:sai@123@cluster0.nnbhn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-  )
-  .then(() => {
-    console.log("Connected");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.error("MongoDB connection error", err));
 
 // middleware
 app.use((req, res, next) => {

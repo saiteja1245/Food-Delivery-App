@@ -1,9 +1,9 @@
-const express = require("express");
+import express from "express";
+import { getAllDishes, getDishes } from "../controllers/dishController.js";  // Correct import with .js extension
 
 const router = express.Router();
 
-const { getDishes } = require("../controllers/dishController");
-
+router.get("/", getAllDishes);
 router.get("/dishes", getDishes);
 
-module.exports = router;
+export default router;
